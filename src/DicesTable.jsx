@@ -4,28 +4,38 @@ import Die from './Die';
 export default class DicesTable extends Component {
   constructor(props) {
     super(props);
-    this.state = { dice1: 'one', dice2: 'one' };
+    this.state = { dice1: 'one', dice2: 'one', isThrown: false };
   }
 
   diceNumbers = ['one', 'two', 'three', 'four', 'five', 'six'];
 
   getRandomNumbers = () => {
-    let numberForDice1 =
-      this.diceNumbers[Math.floor(Math.random() * this.diceNumbers.length)];
-    let numberForDice2 =
-      this.diceNumbers[Math.floor(Math.random() * this.diceNumbers.length)];
-    this.setState({ dice1: numberForDice1, dice2: numberForDice2 });
-    console.log(this.state.dice1, this.state.dice2);
+    this.setState({ isThrown: true });
+    setTimeout(() => {
+      let numberForDice1 =
+        this.diceNumbers[Math.floor(Math.random() * this.diceNumbers.length)];
+      let numberForDice2 =
+        this.diceNumbers[Math.floor(Math.random() * this.diceNumbers.length)];
+      this.setState({
+        dice1: numberForDice1,
+        dice2: numberForDice2,
+        isThrown: false,
+      });
+    }, 3000);
   };
 
   render() {
     return (
       <>
         <div className='dicesTable'>
-          <Die diceNumber={this.state.dice1} />
-          <Die diceNumber={this.state.dice2} />
+          <Die diceNumber={this.state.dice1} isThrown={this.state.isThrown} />
+          <Die diceNumber={this.state.dice2} isThrown={this.state.isThrown} />
         </div>
-        <button onClick={this.getRandomNumbers}>CLick me</button>
+        {!this.state.isThrown ? (
+          <button onClick={this.getRandomNumbers}>Roll the dices!</button>
+        ) : (
+          <button disabled={true}>Rolling...</button>
+        )}
       </>
     );
   }
