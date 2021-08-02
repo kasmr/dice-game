@@ -5,7 +5,7 @@ export default class Die extends Component {
     return (
       <div>
         <i
-          style={{ fontSize: '10rem', color: '#95bddc' }}
+          style={{ fontSize: '10rem', color: '#E32636' }}
           className={`fa fa-dice-${this.props.diceNumber}`}
           aria-hidden='true'
         ></i>

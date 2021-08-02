@@ -7,9 +7,15 @@ export default class DicesTable extends Component {
     this.state = { dice1: 'one', dice2: 'one' };
   }
 
+  diceNumbers = ['one', 'two', 'three', 'four', 'five', 'six'];
+
   getRandomNumbers = () => {
-    let numberFordice1 = Math.floor(Math.random() * 6);
-    let numberFordice2 = Math.floor(Math.random() * 6); //????
+    let numberForDice1 =
+      this.diceNumbers[Math.floor(Math.random() * this.diceNumbers.length)];
+    let numberForDice2 =
+      this.diceNumbers[Math.floor(Math.random() * this.diceNumbers.length)];
+    this.setState({ dice1: numberForDice1, dice2: numberForDice2 });
+    console.log(this.state.dice1, this.state.dice2);
   };
 
   render() {
@@ -19,7 +25,7 @@ export default class DicesTable extends Component {
           <Die diceNumber={this.state.dice1} />
           <Die diceNumber={this.state.dice2} />
         </div>
-        <button>CLick me</button>
+        <button onClick={this.getRandomNumbers}>CLick me</button>
       </>
     );
   }
